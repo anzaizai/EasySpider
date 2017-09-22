@@ -1,25 +1,20 @@
-from com.anjie.download import Download;
-
-from lxml.html import etree;
-from com.anjie.scheduler import Scheduler;
-from com.anjie.module.house import House;
-from com.anjie.pipeline import Pipeline;
+from com.anjie.base.spider import BaseSpider;
+from com.anjie.spider.house import House;
 
 
-class Spider:
-    # 待抓取队列
-    start_url = ['https://gz.zu.anjuke.com/?from=navigation'];
+# Created by zaizai at 2017/9/22
 
+
+class Spider(BaseSpider):
     def __init__(self):
-        pass;
+        super(Spider, self).__init__();
+        self.seed_url = ['https://gz.zu.anjuke.com/?from=navigation'];
 
-    def pager_back(self, current_url, html):
+    def pagerProcess(self, page):
         next_link = [];
-        root = etree.HTML(html);
-        list_result = root.xpath('//div[@class="maincontent"]//div[@class="zu-itemmod  "]')
+        list_result = page.xpath('//div[@class="maincontent"]//div[@class="zu-itemmod  "]')
         house_list = [];
         house = None;
-        print(len(list_result))
         result_list = [];
         for node in list_result:
             h = House();
@@ -51,7 +46,7 @@ class Spider:
             supplement = node.xpath('.//div[@class="zu-info"]/p[2]/em/text()')
             h.supplement = supplement;
 
-            #获取价格
+            # 获取价格
             price = node.xpath('.//div[@class="zu-side"]//strong/text()')
 
             h.price = price;
@@ -59,15 +54,10 @@ class Spider:
             h.unit = unit;
             result_list.append(h);
 
-        links = root.xpath('//*[@class="multi-page"]/a/@href');
+        links = page.xpath('//*[@class="multi-page"]/a/@href');
         # 利用集合过滤重复的链接
         s = set(links)
         next_link = list(s);
         print('抽取的链接:%s' % next_link)
-        return {'item': result_list, 'url': next_link}
-
-
-if __name__ == '__main__':
-    sp = Spider();
-    sc = Scheduler(download=Download(), spider=sp, pipline=Pipeline());
-    sc.start_craw();
+        self.pipeline_item = result_list;
+        self.addRequest_urls(next_link);
