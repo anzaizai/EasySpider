@@ -4,6 +4,7 @@ from  urllib import request, error
 from com.anjie.base.download import BaseDownload;
 from  com.anjie.utils.elog import Elog
 from com.anjie.utils.throttle import Throttle;
+import threading
 
 # 默认的延迟事件
 DEFAULT_DELAY = 5
@@ -29,7 +30,7 @@ class DefaultDownload(BaseDownload):
         return self.download(rq)
 
     def download(self, rq):
-        print('download url is %s' % rq.url);
+        Elog.info('download url is %s' % rq.url);
         result = None;
         if self.cache is not None:
             try:
@@ -62,6 +63,7 @@ class DefaultDownload(BaseDownload):
         return result['html'];
 
     def realDownload(self, rq, proxy, num_retries, data=None):
+        Elog.info('realDownload url is %s' % rq.url);
 
         # 进行延迟请求
         self.throttle.wait(rq.url)
@@ -81,6 +83,9 @@ class DefaultDownload(BaseDownload):
                 if hasattr(e, 'code') and 500 <= e.code < 600:
                     return self.realDownload(rq, proxy, num_retries - 1);
                 pass;
+        except ConnectionResetError as e:
+            Elog.error('ConnectionResetError  error');
+
         return {'html': html, 'code': code};
 
 

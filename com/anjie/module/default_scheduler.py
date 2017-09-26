@@ -4,6 +4,8 @@ from urllib.robotparser import RobotFileParser;
 from com.anjie.base.scheduler import BaseScheduler
 from com.anjie.mode.spider_exception import SpiderException;
 from com.anjie.utils.elog import Elog
+from com.anjie.utils.utils import UserAgent;
+
 
 
 class DefaultScheduler(BaseScheduler):
@@ -38,19 +40,31 @@ class DefaultScheduler(BaseScheduler):
             return r;
 
     def nextRequest(self):
-        r = self.belle_queue.pop();
-        if r is None:
+        try:
+            r = self.belle_queue.pop();
+        except IndexError as e:
             return None;
         else:
             return r;
 
+    def isNotEmpty(self):
+        if self.belle_queue and len(self.belle_queue)>0:
+            return True;
+        else:
+            return False;
+
+
     def addRequest(self, rq):
-        pass;
+        rq.headers.setdefault(UserAgent.user_agent_key, UserAgent.user_agent_list[0]);
+        self.belle_queue.extend(rq);
 
     def addRequests(self, rqs):
-        self.belle_queue.extend(rqs);
+        for r in rqs:
+            r.headers.setdefault(UserAgent.user_agent_key, UserAgent.user_agent_list[0]);
+            self.belle_queue.append(r);
 
     def addLoserRequest(self, rq):
+        rq.headers.setdefault(UserAgent.user_agent_key, UserAgent.user_agent_list[0]);
         self.belle_queue.extend(rq);
 
     def start_craw(self):

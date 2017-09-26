@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="838edada-3e3e-44c6-8124-c5b69f6cc37d" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,19 +13,112 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="PyCharm2017.2/coverage/LFHSpider$spiders.coverage" NAME="spiders Coverage Results" MODIFIED="1505278221832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
     <SUITE FILE_PATH="coverage/LFHSpider$demo.coverage" NAME="demo Coverage Results" MODIFIED="1505969674195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
+    <SUITE FILE_PATH="coverage/LFHSpider$elog.coverage" NAME="elog Coverage Results" MODIFIED="1506386622054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie/utils" />
     <SUITE FILE_PATH="PyCharm2017.2/coverage/LFHSpider$demo.coverage" NAME="demo Coverage Results" MODIFIED="1505178192938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
-    <SUITE FILE_PATH="coverage/LFHSpider$engine.coverage" NAME="engine Coverage Results" MODIFIED="1506056747472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
+    <SUITE FILE_PATH="coverage/LFHSpider$engine.coverage" NAME="engine Coverage Results" MODIFIED="1506387367450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
     <SUITE FILE_PATH="PyCharm2017.2/coverage/LFHSpider$download.coverage" NAME="download Coverage Results" MODIFIED="1504745610132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
     <SUITE FILE_PATH="coverage/LFHSpider$spiders.coverage" NAME="spiders Coverage Results" MODIFIED="1505967939312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/com/anjie" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="ThreadSpider.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/spider/ThreadSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="93" column="23" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <folding>
+                <element signature="e#34#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myspider.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/spider/myspider.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="engine.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/com/anjie/engine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding>
+                <element signature="e#34#96#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default_pipeline.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/module/default_pipeline.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default_scheduler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/module/default_scheduler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default_download.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="elog.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/utils/elog.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="91" lean-forward="false" selection-start-line="40" selection-start-column="91" selection-end-line="40" selection-end-column="91" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="threading.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/threading.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="852" column="4" lean-forward="false" selection-start-line="852" selection-start-column="4" selection-end-line="852" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spider.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,6 +143,8 @@
       <find>get_robots</find>
       <find>throttle</find>
       <find>key</find>
+      <find>download over url</find>
+      <find>XMLSyntaxError</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -78,13 +174,18 @@
         <option value="$PROJECT_DIR$/com/anjie/spider/myspider.py" />
         <option value="$PROJECT_DIR$/com/anjie/e_request.py" />
         <option value="$PROJECT_DIR$/com/anjie/utils.py" />
-        <option value="$PROJECT_DIR$/com/anjie/module/default_scheduler.py" />
-        <option value="$PROJECT_DIR$/com/anjie/base/spider.py" />
         <option value="$PROJECT_DIR$/com/anjie/base/scheduler.py" />
         <option value="$PROJECT_DIR$/com/anjie/base/pipeline.py" />
-        <option value="$PROJECT_DIR$/com/anjie/module/default_download.py" />
-        <option value="$PROJECT_DIR$/com/anjie/engine.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/com/anjie/spider.log" />
+        <option value="$PROJECT_DIR$/com/anjie/mode/e_request.py" />
+        <option value="$PROJECT_DIR$/com/anjie/spider/AlexaSpider.py" />
+        <option value="$PROJECT_DIR$/com/anjie/module/default_scheduler.py" />
+        <option value="$PROJECT_DIR$/com/anjie/utils/elog.py" />
+        <option value="$PROJECT_DIR$/com/anjie/module/default_download.py" />
+        <option value="$PROJECT_DIR$/com/anjie/spider/ThreadSpider.py" />
+        <option value="$PROJECT_DIR$/com/anjie/base/spider.py" />
+        <option value="$PROJECT_DIR$/com/anjie/engine.py" />
       </list>
     </option>
   </component>
@@ -136,6 +237,48 @@
             </path>
             <path>
               <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="mode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="spider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LFHSpider" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="anjie" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LFHSpider" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
@@ -153,17 +296,19 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/com/anjie/demo.py" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/com/anjie/demo.py&#10;/Users/zaizai/PycharmProjects/LFHSpider/com/anjie/spider.log" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/com/anjie/utils" />
-      <recent name="$PROJECT_DIR$/com/anjie/mode" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/com/anjie" />
       <recent name="$PROJECT_DIR$/com/anjie/spider" />
       <recent name="$PROJECT_DIR$/com/anjie/base" />
       <recent name="$PROJECT_DIR$/com/anjie/module" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/com/anjie/utils" />
+      <recent name="$PROJECT_DIR$/com/anjie/mode" />
+      <recent name="$PROJECT_DIR$/com/anjie/spider" />
       <recent name="$PROJECT_DIR$/com/anjie/base" />
       <recent name="$PROJECT_DIR$/com/anjie/module" />
     </key>
@@ -217,6 +362,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="elog" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/com/anjie/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="LFHSpider" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/com/anjie/utils/elog.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="engine" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -253,18 +416,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.download" />
       <item index="1" class="java.lang.String" itemvalue="Python.spiders" />
       <item index="2" class="java.lang.String" itemvalue="Python.demo" />
       <item index="3" class="java.lang.String" itemvalue="Python.engine" />
+      <item index="4" class="java.lang.String" itemvalue="Python.elog" />
     </list>
     <recent_temporary>
-      <list size="4">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.engine" />
-        <item index="1" class="java.lang.String" itemvalue="Python.demo" />
-        <item index="2" class="java.lang.String" itemvalue="Python.spiders" />
-        <item index="3" class="java.lang.String" itemvalue="Python.download" />
+        <item index="1" class="java.lang.String" itemvalue="Python.elog" />
+        <item index="2" class="java.lang.String" itemvalue="Python.demo" />
+        <item index="3" class="java.lang.String" itemvalue="Python.spiders" />
+        <item index="4" class="java.lang.String" itemvalue="Python.download" />
       </list>
     </recent_temporary>
   </component>
@@ -289,25 +454,28 @@
     <frame x="36" y="23" width="1224" height="759" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2809316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="136" y="123" width="1024" height="559" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2809316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="136" y="123" width="1024" height="559" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -322,7 +490,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/com/anjie/module/default_download.py</url>
-          <line>41</line>
+          <line>42</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -336,9 +504,9 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/com/anjie/base/spider.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/com/anjie/engine.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -348,34 +516,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="11" />
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/com/anjie/utils/utils.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py" />
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/python_stubs/-1625016946/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/demo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="54" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="53" selection-end-column="54" />
-          <folding>
-            <marker date="1505969674000" expanded="true" signature="2105:2225" ph="CREATE TABLE... user_table" />
-            <marker date="1505969674000" expanded="true" signature="2536:2577" ph="insert into user... " />
-            <marker date="1505969674000" expanded="true" signature="2536:3328" ph="insert into user... " />
-            <marker date="1505969674000" expanded="true" signature="2964:3011" ph="INSERT INTO user_table... " />
-            <marker date="1505969674000" expanded="true" signature="3232:3256" ph="SELECT * FRO... user_table" />
-            <marker date="1505969674000" expanded="true" signature="3548:3572" ph="SELECT * FRO... user_table" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/utils/utils.py" />
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/python_stubs/-1625016946/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/utils/utils.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py" />
@@ -392,8 +537,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com/anjie/mode/spider_exception.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/spider/house.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/spider/house_db.py" />
     <entry file="file:///usr/local/lib/python3.6/site-packages/urllib3/util/timeout.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1290">
@@ -402,15 +545,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com/anjie/save_data.txt" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/utils/elog.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/utils/throttle.py" />
-    <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/urllib/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4635">
-          <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/com/anjie/cache_dir/gz.zu.anjuke.com/fangyuan/p3/index.html" />
     <entry file="file:///usr/local/lib/python3.6/site-packages/pymongo/collection.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -466,30 +601,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="2880" column="8" lean-forward="false" selection-start-line="2880" selection-start-column="8" selection-end-line="2880" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com/anjie/spider.log" />
     <entry file="file://$PROJECT_DIR$/com/anjie/scheduler.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/module/default_spider.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/cache/disk_cache.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/cache/mongo_cache.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/mode/e_request.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/utils/utils.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/base/scheduler.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/base/download.py" />
     <entry file="file://$PROJECT_DIR$/com/anjie/base/pipeline.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_scheduler.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_pipeline.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/engine.py" />
-    <entry file="file://$PROJECT_DIR$/com/anjie/spider/myspider.py" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="93" column="23" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="85" column="5" lean-forward="false" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider/house_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1506302155000" expanded="true" signature="357:665" ph="CREATE TABLE... user_table" />
+            <marker date="1506302155000" expanded="true" signature="940:987" ph="INSERT INTO user_table... " />
+            <marker date="1506302155000" expanded="true" signature="1344:1391" ph="INSERT INTO user_table... " />
+            <marker date="1506302155000" expanded="true" signature="1593:1617" ph="SELECT * FRO... user_table" />
+            <marker date="1506302155000" expanded="true" signature="1884:1908" ph="SELECT * FRO... user_table" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider/house.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/urllib/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4635">
+          <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="40" lean-forward="false" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/python_stubs/-1625016946/lxml/etree/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="231" column="28" lean-forward="true" selection-start-line="231" selection-start-column="28" selection-end-line="231" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/mode/e_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/base/download.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/_strptime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="328" column="0" lean-forward="false" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider/top-1m.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ntpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/cache/disk_cache.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="52" column="22" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/top-1m.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/lxml/html/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="24" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="852" column="4" lean-forward="false" selection-start-line="852" selection-start-column="4" selection-end-line="852" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider/myspider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/utils/spider.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/utils/elog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="91" lean-forward="false" selection-start-line="40" selection-start-column="91" selection-end-line="40" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/spider/ThreadSpider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="e#34#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/module/default_download.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/base/spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com/anjie/engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#34#96#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
