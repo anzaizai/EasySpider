@@ -10,10 +10,10 @@ class ThreadSpider(BaseSpider):
     def __init__(self):
         super(ThreadSpider, self).__init__();
         self.max_urls = 000;
-        ulist = 'https://www.baidu.com';
+        ulist = 'https://www.baidu.com/';
         rlist = [];
-        for _ in range(0,100):
-            r = ERequest(url=ulist, needParse=False)
+        for i in range(0,100):
+            r = ERequest(url=ulist+str(i), needParse=False)
             rlist.append(r);
         self.seed_request = list(rlist)
 

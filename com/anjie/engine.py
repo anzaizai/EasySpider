@@ -2,18 +2,21 @@
 
 from com.anjie.module.default_download import DefaultDownload;
 from com.anjie.module.default_scheduler import DefaultScheduler;
+from com.anjie.module.mongo_scheduler import MongoScheduler;
 from com.anjie.utils.elog import Elog;
 from com.anjie.spider.myspider import Spider
 from com.anjie.spider.ThreadSpider import ThreadSpider;
 from datetime import datetime
-import threading,time
+import threading, time
+import multiprocessing
 
 
 class Engine:
-    def __init__(self, spider=None, scheduler=DefaultScheduler(), download=DefaultDownload(delay=0), pipline=None):
+    def __init__(self, spider=None, scheduler=MongoScheduler(), download=DefaultDownload(delay=0), pipline=None):
         super(Engine, self).__init__();
         self.spider = spider;
         self.scheduler = scheduler;
+        self.scheduler.mongo_queue.clear();
         self.download = download;
         self.pipline = pipline;
 
@@ -23,7 +26,10 @@ class Engine:
     def start(self):
         self.scheduler.addRequests(self.spider.getSeeds())
         Elog.info('>>start time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
-        startTime = datetime.now();
+
+        self.thread_task()
+
+    def thread_task(self):
         while True:
             rq = self.scheduler.nextRequest();
             if rq is None:
@@ -31,7 +37,7 @@ class Engine:
                 break;
 
             threads = []
-            max_threads =1;
+            max_threads = 8;
             lock = threading.Lock();
             while threads or self.scheduler.isNotEmpty():
                 # the crawl is still active
@@ -54,11 +60,9 @@ class Engine:
                     finally:
                         lock.release();
 
-                # all threads have been processed
-                # sleep temporarily so CPU can focus execution on other threads
-            Elog.info('>>end time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
-            endTime = datetime.now();
-            Elog.info('cost time is %d' % (endTime - startTime).seconds);
+                        # all threads have been processed
+                        # sleep temporarily so CPU can focus execution on other threads
+
 
     def sleep(self, time):
         pass;
@@ -68,7 +72,7 @@ class Engine:
 
 
 class ThreadTask(threading.Thread):
-    def __init__(self, rq, download, pipline=None, scheduler=None,spider = None):
+    def __init__(self, rq, download, pipline=None, scheduler=None, spider=None):
         super(ThreadTask, self).__init__();
         self.rq = rq;
         self.download = download;
@@ -89,7 +93,30 @@ class ThreadTask(threading.Thread):
             pass
 
 
-if __name__ == '__main__':
-    e = Engine();
+def running_tas():
+    e = Engine(scheduler=MongoScheduler());
     e.addSpider(ThreadSpider());
     e.start()
+
+
+def process_crawler():
+    num_cpus = multiprocessing.cpu_count()
+    # pool = multiprocessing.Pool(processes=num_cpus)
+    Elog.info('Starting {} processes'.format(num_cpus));
+    processes = []
+    startTime = datetime.now();
+    for i in range(num_cpus):
+        p = multiprocessing.Process(target=running_tas, )
+        # parsed = pool.apply_async(threaded_link_crawler, args, kwargs)
+        p.start()
+        processes.append(p)
+    # wait for processes to complete
+    for p in processes:
+        p.join()
+    Elog.info('>>end time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
+    endTime = datetime.now();
+    Elog.info('cost time is %d' % (endTime - startTime).seconds);
+
+
+if __name__ == '__main__':
+    process_crawler()

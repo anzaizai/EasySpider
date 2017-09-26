@@ -35,7 +35,7 @@ class MongoQueue:
     def pop(self):
         record = self.db.crawl_queue.find_and_modify(
             query={'status': self.OUTSTANDING},
-            update={'$set': {'status': self.PROCESSING}, 'timestamp': datetime.now()}
+            update={'$set': {'status': self.PROCESSING, 'timestamp': datetime.utcnow()}}
         )
         if record:
             return pickle.loads(zlib.decompress(record['request']));
@@ -43,27 +43,27 @@ class MongoQueue:
             self.repair()
             raise KeyError()
 
-        def peek(self):
-            record = self.db.crawl_queue.find_one({'status': self.OUTSTANDING})
-            if record:
-                return pickle.loads(zlib.decompress(record['request']));
+    def peek(self):
+        record = self.db.crawl_queue.find_one({'status': self.OUTSTANDING})
+        if record:
+            return pickle.loads(zlib.decompress(record['request']));
 
-        def complete(self, url):
-            self.db.crawl_queue.update({'_id': url}, {'$set': {'status': self.COMPLETE}})
+    def complete(self, url):
+        self.db.crawl_queue.update({'_id': url}, {'$set': {'status': self.COMPLETE}})
 
-        def repair(self):
-            """Release stalled jobs
-            """
-            record = self.db.crawl_queue.find_and_modify(
-                query={
-                    'timestamp': {'$lt': datetime.now() - timedelta(seconds=self.timeout)},
-                    'status': {'$ne': self.COMPLETE}
-                },
-                update={'$set': {'status': self.OUTSTANDING}}
-            )
-            if record:
-                Elog.info('Released:', record['_id'])
+    def repair(self):
+        """Release stalled jobs
+        """
+        record = self.db.crawl_queue.find_and_modify(
+            query={
+                'timestamp': {'$lt': datetime.now() - timedelta(seconds=self.timeout)},
+                'status': {'$ne': self.COMPLETE}
+            },
+            update={'$set': {'status': self.OUTSTANDING}}
+        )
+        if record:
+            Elog.info('Released:' + record['_id'])
 
-        def clear(self):
-            Elog.info('mongo queue be clear')
-            self.db.crawl_queue.drop()
+    def clear(self):
+        Elog.info('mongo queue be clear')
+        self.db.crawl_queue.drop()
