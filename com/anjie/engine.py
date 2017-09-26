@@ -31,7 +31,7 @@ class Engine:
                 break;
 
             threads = []
-            max_threads =10;
+            max_threads =4;
             lock = threading.Lock();
             while threads or self.scheduler.isNotEmpty():
                 # the crawl is still active
@@ -56,7 +56,6 @@ class Engine:
 
                 # all threads have been processed
                 # sleep temporarily so CPU can focus execution on other threads
-                time.sleep(1)
             Elog.info('>>end time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
             endTime = datetime.now();
             Elog.info('cost time is %d' % (endTime - startTime).seconds);
