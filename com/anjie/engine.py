@@ -31,7 +31,7 @@ class Engine:
                 break;
 
             threads = []
-            max_threads =4;
+            max_threads =1;
             lock = threading.Lock();
             while threads or self.scheduler.isNotEmpty():
                 # the crawl is still active
