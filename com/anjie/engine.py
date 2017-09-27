@@ -2,6 +2,8 @@
 
 from com.anjie.module.default_download import DefaultDownload;
 from com.anjie.module.default_scheduler import DefaultScheduler;
+from com.anjie.module.default_pipeline import DefaultPipeline;
+
 from com.anjie.module.mongo_scheduler import MongoScheduler;
 from com.anjie.utils.elog import Elog;
 from com.anjie.spider.myspider import Spider
@@ -9,6 +11,8 @@ from com.anjie.spider.ThreadSpider import ThreadSpider;
 from datetime import datetime
 import threading, time
 import multiprocessing
+import asyncio
+import functools
 
 
 class Engine:
@@ -19,50 +23,72 @@ class Engine:
         self.scheduler.mongo_queue.clear();
         self.download = download;
         self.pipline = pipline;
+        self.loop = asyncio.get_event_loop();
+
+        self.pageConsumer = self.pageConsumer();
+        self.pageConsumer.send(None);
 
     def addSpider(self, spider):
         self.spider = spider;
 
+    def startLoop(self, loop):
+        asyncio.set_event_loop(loop);
+        loop.run_forever();
+
+    # 协程下载页面
+    async def download_task(self, pageConsumer, rq):
+        resultPage = self.download.excuteRequest(rq);
+        if resultPage is not None:
+            pageConsumer.send((resultPage, rq))
+        return (resultPage, rq);
+
+    def done_call_back(self, loop, result):
+        print('done_call_back is Done.')
+        # loop.stop();
+
+    def parse_done_call_back(self, loop, result):
+        print('parse_done_call_back is Done.')
+        # loop.stop();
+
+    async def main_task(self, rqList):
+        tasks = [];
+        for rq in rqList:
+            coroutine = self.download_task(self.pageConsumer, rq);
+            tasks.append(coroutine)
+        return await asyncio.gather(*tasks)
+
+
+
     def start(self):
-        self.scheduler.addRequests(self.spider.getSeeds())
-        Elog.info('>>start time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
+        try:
+            self.scheduler.addRequests(self.spider.getSeeds())
+            Elog.info('>>start time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
+            max_number = 4;
+            rqList = [];
+            while True:
+                if not self.scheduler.isNotEmpty():
+                    Elog.warning('Engine is will stop,because scheduler has not more request be schedule');
+                    break;
+                while self.scheduler.isNotEmpty():
+                    rq = self.scheduler.nextRequest();
+                    rqList.append(rq);
+                    if len(rqList) < max_number:
+                        continue;
+                if len(rqList) > 0:
+                    coroutine = self.main_task(rqList);
+                    task = asyncio.ensure_future(coroutine)
+                    results = self.loop.run_until_complete(task);
+                    for result in results:
+                        print('Task ret: ', result)
+                    rqList.clear();
 
-        self.thread_task()
-
-    def thread_task(self):
-        while True:
-            rq = self.scheduler.nextRequest();
-            if rq is None:
-                Elog.warning('Engine is will stop,because scheduler has not more request be schedule');
-                break;
-
-            threads = []
-            max_threads = 8;
-            lock = threading.Lock();
-            while threads or self.scheduler.isNotEmpty():
-                # the crawl is still active
-                for thread in threads:
-                    if not thread.is_alive():
-                        # remove the stopped threads
-                        threads.remove(thread)
-                while len(threads) < max_threads and self.scheduler.isNotEmpty():
-                    # can start some more threads
-
-                    try:
-                        lock.acquire();
-                        rp = self.scheduler.nextRequest();
-                        thread = ThreadTask(rq=rq, download=self.download, spider=self.spider)
-                        thread.setDaemon(True)  # set daemon so main thread can exit when receives ctrl-c
-                        thread.start()
-                        threads.append(thread)
-                    except Exception:
-                        pass
-                    finally:
-                        lock.release();
-
-                        # all threads have been processed
-                        # sleep temporarily so CPU can focus execution on other threads
-
+        except KeyboardInterrupt as e:
+            print(asyncio.Task.all_tasks())
+            print(asyncio.gather(*asyncio.Task.all_tasks()).cancel())
+            self.loop.stop()
+            self.loop.run_forever()
+        finally:
+            self.loop.close()
 
     def sleep(self, time):
         pass;
@@ -70,31 +96,31 @@ class Engine:
     def stop(self):
         pass
 
+    async def parse_task(self, resultPage, rq):
+        (pipelineItems, nextRequests) = self.spider.pagerBack(resultPage, rq);
+        if pipelineItems and self.pipline:
+            self.pipline.piplineData(pipelineItems);
+        if nextRequests:
+            self.scheduler.addRequests(nextRequests);
 
-class ThreadTask(threading.Thread):
-    def __init__(self, rq, download, pipline=None, scheduler=None, spider=None):
-        super(ThreadTask, self).__init__();
-        self.rq = rq;
-        self.download = download;
-        self.pipline = pipline;
-        self.scheduler = scheduler;
-        self.spider = spider;
+    def pageConsumer(self):
+        while True:
+            (resultPage, rq) = yield
+            print('pageConsumer')
 
-    def run(self):
-        resultPage = self.download.excuteRequest(self.rq);
-        if resultPage is not None:
-            (pipelineItems, nextRequests) = self.spider.pagerBack(resultPage, self.rq);
-            if pipelineItems and self.pipline:
-                self.pipline.piplineData(pipelineItems);
-            if nextRequests:
-                self.scheduler.addRequests(nextRequests);
-        else:
-            # 判断是否需要加入请求重新请求队列
-            pass
+            if resultPage is not None:
+                coroutine = self.parse_task(resultPage, rq);
+                task = asyncio.ensure_future(coroutine)
+                task.add_done_callback(functools.partial(self.parse_done_call_back, self.loop))
+                # self.loop.run_until_complete(task)
+
+            else:
+                # 判断是否需要加入请求重新请求队列
+                pass
 
 
 def running_tas():
-    e = Engine(scheduler=MongoScheduler());
+    e = Engine(scheduler=MongoScheduler(), pipline=DefaultPipeline());
     e.addSpider(ThreadSpider());
     e.start()
 
@@ -104,6 +130,7 @@ def process_crawler():
     # pool = multiprocessing.Pool(processes=num_cpus)
     Elog.info('Starting {} processes'.format(num_cpus));
     processes = []
+    num_cpus = 1;
     startTime = datetime.now();
     for i in range(num_cpus):
         p = multiprocessing.Process(target=running_tas, )

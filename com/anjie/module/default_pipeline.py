@@ -7,6 +7,7 @@ class DefaultPipeline(BasePipeline):
         pass;
 
     def piplineData(self, data):
-        for v in data:
-            print("<------------------------->")
-            print('\n'.join(['%15s : %s' % item for item in v.__dict__.items()]))
+        pass
+        # for v in data:
+        #     print("<------------------------->")
+        #     print('\n'.join(['%15s : %s' % item for item in v.__dict__.items()]))

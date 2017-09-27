@@ -30,7 +30,7 @@ class ThreadSpider(BaseSpider):
 
 
     def pagerProcess(self, page):
-        pass
+        print(page)
         # if url == self.seed_url:
         #     urls = []
         #     cache = MongoCache()
@@ -42,6 +42,7 @@ class ThreadSpider(BaseSpider):
         #                 if len(urls) == self.max_urls:
         #                     break
         #     return urls
+        self.pipeline_item=['sadasdsad']
 
 
 
