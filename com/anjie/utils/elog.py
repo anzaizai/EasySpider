@@ -1,5 +1,7 @@
 import logging
 import threading
+import multiprocessing
+
 
 
 class Elog:
@@ -26,19 +28,19 @@ class Elog:
 
     @staticmethod
     def debug(msg):
-        logging.debug("[running on thread : " + threading.current_thread().getName()+"]  msg: " + msg);
+        logging.debug("[process is "+ multiprocessing.current_process().name+"][running on thread : " + threading.current_thread().getName()+"]  msg: " + msg);
 
     @staticmethod
     def info(msg):
-        logging.info("[running on thread :" +threading.current_thread().getName()+"]  msg: "+ msg);
+        logging.info("[process is "+ multiprocessing.current_process().name+"][running on thread :" +threading.current_thread().getName()+"]  msg: "+ msg);
 
     @staticmethod
     def warning(msg):
-        logging.warning("[running on thread :" +threading.current_thread().getName()+"]  msg: "+ msg);
+        logging.warning("[process is "+ multiprocessing.current_process().name+"][running on thread :" +threading.current_thread().getName()+"]  msg: "+ msg);
 
     @staticmethod
     def error(msg):
-        logging.error("[running on thread :"+threading.current_thread().getName()+"]  msg: "+ msg);
+        logging.error("[process is "+ multiprocessing.current_process().name+"][running on thread :"+threading.current_thread().getName()+"]  msg: "+ msg);
 
 
 if __name__ == '__main__':

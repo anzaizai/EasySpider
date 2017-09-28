@@ -5,9 +5,10 @@ from com.anjie.spider.house import House;
 # Created by zaizai at 2017/9/22
 
 
-class Spider(BaseSpider):
+class AnJuKeSpider(BaseSpider):
     def __init__(self):
-        super(Spider, self).__init__();
+        super(AnJuKeSpider, self).__init__();
+        self.spiderName='AnJuKe'
         self.seed_url = ['https://gz.zu.anjuke.com/?from=navigation'];
 
     def pagerProcess(self, page):

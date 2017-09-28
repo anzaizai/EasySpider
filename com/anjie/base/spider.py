@@ -10,10 +10,11 @@ class BaseSpider:
         self.seed_request = None;
         self.pipeline_item = None;
         self.requests = [];
+        self.spiderName = "";
 
     def addRequest_urls(self, urls):
         if urls:
-            for r in map(lambda url: ERequest(url), urls):
+            for r in map(lambda url: ERequest(url, spiderName=self.spiderName), urls):
                 self.requests.append(r);
 
     def pagerProcess(self, page):
@@ -39,7 +40,7 @@ class BaseSpider:
         result = [];
         if self.seed_url:
             for url in self.seed_url:
-                r = ERequest(url=url);
+                r = ERequest(url=url, spiderName=self.spiderName);
                 r.headers = {}
                 result.append(r);
 

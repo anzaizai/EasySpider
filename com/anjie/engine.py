@@ -6,30 +6,42 @@ from com.anjie.module.default_pipeline import DefaultPipeline;
 
 from com.anjie.module.mongo_scheduler import MongoScheduler;
 from com.anjie.utils.elog import Elog;
-from com.anjie.spider.myspider import Spider
 from com.anjie.spider.ThreadSpider import ThreadSpider;
 from datetime import datetime
 import threading, time
 import multiprocessing
 import asyncio
 import functools
+import psutil
+from com.anjie.spider.AnJuKePipeline import AnJuKePipeline
+from com.anjie.spider.AnJukeSpider import AnJuKeSpider;
 
 
 class Engine:
-    def __init__(self, spider=None, scheduler=MongoScheduler(), download=DefaultDownload(delay=0), pipline=None):
+    def __init__(self, spider=None, scheduler=MongoScheduler(), download=DefaultDownload(delay=5), pipline=None):
         super(Engine, self).__init__();
-        self.spider = spider;
+
+        self.spider = dict();
+        if spider:
+            for s in spider:
+                self.spider.setdefault(s.spiderName, s);
         self.scheduler = scheduler;
         self.scheduler.mongo_queue.clear();
         self.download = download;
-        self.pipline = pipline;
+        self.pipeline = dict();
+        if pipline:
+            for p in pipline:
+                self.pipeline.setdefault(p.belongToSpider, p);
         self.loop = asyncio.get_event_loop();
-
         self.pageConsumer = self.pageConsumer();
         self.pageConsumer.send(None);
+        self.max_number = 4;
+        self.isSleep = False;
+        self.isParseing = False;
+
 
     def addSpider(self, spider):
-        self.spider = spider;
+        self.spider.add(spider);
 
     def startLoop(self, loop):
         asyncio.set_event_loop(loop);
@@ -39,6 +51,7 @@ class Engine:
     async def download_task(self, pageConsumer, rq):
         resultPage = self.download.excuteRequest(rq);
         if resultPage is not None:
+            self.scheduler.mongo_queue.complete(rq.url);
             pageConsumer.send((resultPage, rq))
         return (resultPage, rq);
 
@@ -49,6 +62,7 @@ class Engine:
     def parse_done_call_back(self, loop, result):
         print('parse_done_call_back is Done.')
         # loop.stop();
+        self.isParseing = False;
 
     async def main_task(self, rqList):
         tasks = [];
@@ -57,37 +71,50 @@ class Engine:
             tasks.append(coroutine)
         return await asyncio.gather(*tasks)
 
-
+    def getSeeds(self):
+        rqs = list()
+        print(self.spider)
+        for k,s in self.spider.items():
+            rqs.extend(s.getSeeds());
+        return rqs;
 
     def start(self):
         try:
-            self.scheduler.addRequests(self.spider.getSeeds())
+            self.scheduler.addRequests(self.getSeeds())
             Elog.info('>>start time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
-            max_number = 4;
             rqList = [];
             while True:
-                if not self.scheduler.isNotEmpty():
-                    Elog.warning('Engine is will stop,because scheduler has not more request be schedule');
-                    break;
+                if not self.scheduler.isNotEmpty() and not  self.isParseing:
+                    time.sleep(10);
+                    if not self.scheduler.isNotEmpty() and not self.isParseing:
+                        Elog.warning('Engine is will stop,because scheduler has not more request be schedule');
+                        break;
                 while self.scheduler.isNotEmpty():
                     rq = self.scheduler.nextRequest();
                     rqList.append(rq);
-                    if len(rqList) < max_number:
+                    if len(rqList) < self.max_number:
                         continue;
+                    else:
+                        break
                 if len(rqList) > 0:
                     coroutine = self.main_task(rqList);
                     task = asyncio.ensure_future(coroutine)
                     results = self.loop.run_until_complete(task);
-                    for result in results:
-                        print('Task ret: ', result)
                     rqList.clear();
+                    Elog.info('loop is rqList size is %s' % len(rqList))
+
+                    # for result in results:
+                    #     print('Task ret: ', result)
+
 
         except KeyboardInterrupt as e:
+
             print(asyncio.Task.all_tasks())
             print(asyncio.gather(*asyncio.Task.all_tasks()).cancel())
             self.loop.stop()
             self.loop.run_forever()
         finally:
+            Elog.info('loop is close')
             self.loop.close()
 
     def sleep(self, time):
@@ -97,44 +124,53 @@ class Engine:
         pass
 
     async def parse_task(self, resultPage, rq):
-        (pipelineItems, nextRequests) = self.spider.pagerBack(resultPage, rq);
-        if pipelineItems and self.pipline:
-            self.pipline.piplineData(pipelineItems);
+        spider = self.spider.get(rq.spiderName, None)
+        if spider:
+            (pipelineItems, nextRequests) = spider.pagerBack(resultPage, rq);
+        pipeline = self.pipeline.get(rq.spiderName, None)
         if nextRequests:
             self.scheduler.addRequests(nextRequests);
+
+        if pipelineItems and pipeline:
+            self.pipline.piplineData(pipelineItems);
 
     def pageConsumer(self):
         while True:
             (resultPage, rq) = yield
             print('pageConsumer')
-
             if resultPage is not None:
+                self.isParseing = True;
                 coroutine = self.parse_task(resultPage, rq);
                 task = asyncio.ensure_future(coroutine)
                 task.add_done_callback(functools.partial(self.parse_done_call_back, self.loop))
                 # self.loop.run_until_complete(task)
-
             else:
                 # 判断是否需要加入请求重新请求队列
                 pass
 
 
-def running_tas():
-    e = Engine(scheduler=MongoScheduler(), pipline=DefaultPipeline());
-    e.addSpider(ThreadSpider());
+def running_tas(spiders=None, pipelines=None, scheduler=DefaultScheduler()):
+    e = Engine(scheduler=scheduler, pipline=pipelines, spider=spiders);
     e.start()
 
 
-def process_crawler():
+processes = []
+
+
+def process_crawler(spiders, pipelines, scheduler):
+    Elog.info(".......")
     num_cpus = multiprocessing.cpu_count()
     # pool = multiprocessing.Pool(processes=num_cpus)
     Elog.info('Starting {} processes'.format(num_cpus));
-    processes = []
-    num_cpus = 1;
+
+    # pool.apply(func=running_tas)
     startTime = datetime.now();
+    # pool.join();
+    num_cpus = 1
     for i in range(num_cpus):
-        p = multiprocessing.Process(target=running_tas, )
+        p = multiprocessing.Process(target=running_tas, args=(spiders, pipelines, scheduler,))
         # parsed = pool.apply_async(threaded_link_crawler, args, kwargs)
+        p.daemon = True
         p.start()
         processes.append(p)
     # wait for processes to complete
@@ -145,5 +181,30 @@ def process_crawler():
     Elog.info('cost time is %d' % (endTime - startTime).seconds);
 
 
+def stop(pid):
+    print('进程暂停  进程编号 %s ' % (pid))
+    p = psutil.Process(pid)
+    p.suspend()
+
+
+def wake(pid):
+    print('进程恢复  进程编号 %s ' % (pid))
+    p = psutil.Process(pid)
+    p.resume()
+
+
+def process_crawler_pasue():
+    for p in processes:
+        stop(p.pid)
+
+
+def process_crawler_wake():
+    for p in processes:
+        wake(p.pid)
+    for p in processes:
+        p = psutil.Process(p.pid)
+        print(p.is_running())
+
+
 if __name__ == '__main__':
-    process_crawler()
+    process_crawler(spiders=[AnJuKeSpider(), ], pipelines=[AnJuKePipeline(), ], scheduler=MongoScheduler())
