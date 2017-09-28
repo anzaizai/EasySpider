@@ -30,6 +30,7 @@ class MongoQueue:
                 {'_id': rq.url, 'request': Binary(zlib.compress(pickle.dumps(rq))), 'status': self.OUTSTANDING}
             )
         except errors.DuplicateKeyError as e:
+            Elog.error('DuplicateKeyError push error ')
             pass
 
     def pop(self):

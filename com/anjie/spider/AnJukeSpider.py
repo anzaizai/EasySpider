@@ -8,10 +8,11 @@ from com.anjie.spider.house import House;
 class AnJuKeSpider(BaseSpider):
     def __init__(self):
         super(AnJuKeSpider, self).__init__();
-        self.spiderName='AnJuKe'
+        self.spiderName = 'AnJuKe'
         self.seed_url = ['https://gz.zu.anjuke.com/?from=navigation'];
 
-    def pagerProcess(self, page):
+    def pagerProcess(self, url, page):
+        print('current url is %s'%url)
         next_link = [];
         list_result = page.xpath('//div[@class="maincontent"]//div[@class="zu-itemmod  "]')
         house_list = [];

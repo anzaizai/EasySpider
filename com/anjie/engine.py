@@ -33,12 +33,9 @@ class Engine:
             for p in pipline:
                 self.pipeline.setdefault(p.belongToSpider, p);
         self.loop = asyncio.get_event_loop();
-        self.pageConsumer = self.pageConsumer();
-        self.pageConsumer.send(None);
         self.max_number = 4;
         self.isSleep = False;
         self.isParseing = False;
-
 
     def addSpider(self, spider):
         self.spider.add(spider);
@@ -48,16 +45,26 @@ class Engine:
         loop.run_forever();
 
     # 协程下载页面
-    async def download_task(self, pageConsumer, rq):
+    async def download_task(self, rq):
         resultPage = self.download.excuteRequest(rq);
         if resultPage is not None:
             self.scheduler.mongo_queue.complete(rq.url);
-            pageConsumer.send((resultPage, rq))
+        spider = self.spider.get(rq.spiderName, None)
+        if spider:
+            (pipelineItems, nextRequests) = spider.pagerBack(resultPage, rq);
+        if nextRequests:
+            self.scheduler.addRequests(nextRequests);
+
+        pipeline = self.pipeline.get(rq.spiderName, None)
+        if pipelineItems and pipeline:
+            pipeline.piplineData(pipelineItems);
         return (resultPage, rq);
+
 
     def done_call_back(self, loop, result):
         print('done_call_back is Done.')
         # loop.stop();
+
 
     def parse_done_call_back(self, loop, result):
         print('parse_done_call_back is Done.')
@@ -67,14 +74,16 @@ class Engine:
     async def main_task(self, rqList):
         tasks = [];
         for rq in rqList:
-            coroutine = self.download_task(self.pageConsumer, rq);
+            coroutine = self.download_task(rq);
             tasks.append(coroutine)
         return await asyncio.gather(*tasks)
 
     def getSeeds(self):
+
         rqs = list()
+
         print(self.spider)
-        for k,s in self.spider.items():
+        for k, s in self.spider.items():
             rqs.extend(s.getSeeds());
         return rqs;
 
@@ -84,7 +93,7 @@ class Engine:
             Elog.info('>>start time is %s' % datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'))
             rqList = [];
             while True:
-                if not self.scheduler.isNotEmpty() and not  self.isParseing:
+                if not self.scheduler.isNotEmpty() and not self.isParseing:
                     time.sleep(10);
                     if not self.scheduler.isNotEmpty() and not self.isParseing:
                         Elog.warning('Engine is will stop,because scheduler has not more request be schedule');
@@ -117,36 +126,13 @@ class Engine:
             Elog.info('loop is close')
             self.loop.close()
 
+
     def sleep(self, time):
         pass;
 
+
     def stop(self):
         pass
-
-    async def parse_task(self, resultPage, rq):
-        spider = self.spider.get(rq.spiderName, None)
-        if spider:
-            (pipelineItems, nextRequests) = spider.pagerBack(resultPage, rq);
-        pipeline = self.pipeline.get(rq.spiderName, None)
-        if nextRequests:
-            self.scheduler.addRequests(nextRequests);
-
-        if pipelineItems and pipeline:
-            self.pipline.piplineData(pipelineItems);
-
-    def pageConsumer(self):
-        while True:
-            (resultPage, rq) = yield
-            print('pageConsumer')
-            if resultPage is not None:
-                self.isParseing = True;
-                coroutine = self.parse_task(resultPage, rq);
-                task = asyncio.ensure_future(coroutine)
-                task.add_done_callback(functools.partial(self.parse_done_call_back, self.loop))
-                # self.loop.run_until_complete(task)
-            else:
-                # 判断是否需要加入请求重新请求队列
-                pass
 
 
 def running_tas(spiders=None, pipelines=None, scheduler=DefaultScheduler()):
@@ -166,7 +152,6 @@ def process_crawler(spiders, pipelines, scheduler):
     # pool.apply(func=running_tas)
     startTime = datetime.now();
     # pool.join();
-    num_cpus = 1
     for i in range(num_cpus):
         p = multiprocessing.Process(target=running_tas, args=(spiders, pipelines, scheduler,))
         # parsed = pool.apply_async(threaded_link_crawler, args, kwargs)

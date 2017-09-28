@@ -17,7 +17,7 @@ class BaseSpider:
             for r in map(lambda url: ERequest(url, spiderName=self.spiderName), urls):
                 self.requests.append(r);
 
-    def pagerProcess(self, page):
+    def pagerProcess(self, rul, page):
         pass;
 
     def pagerBack(self, page, rq):
@@ -26,7 +26,7 @@ class BaseSpider:
             if rq.needParse:
                 page = etree.HTML(page);
         finally:
-            self.pagerProcess(page);
+            self.pagerProcess(rq.url, page);
 
         item = self.pipeline_item;
         requests = None;
