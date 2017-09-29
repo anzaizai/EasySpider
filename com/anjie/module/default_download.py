@@ -30,6 +30,8 @@ class DefaultDownload(BaseDownload):
         return self.download(rq)
 
     def download(self, rq):
+        if not  rq or not hasattr(rq,'url'):
+            return ;
         Elog.info('download url is %s' % rq.url);
         result = None;
         if self.cache is not None:

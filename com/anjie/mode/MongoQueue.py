@@ -27,9 +27,9 @@ class MongoQueue:
     def push(self, rq):
         try:
             self.db.crawl_queue.insert(
-                {'_id': rq.url, 'request': Binary(zlib.compress(pickle.dumps(rq))), 'status': self.OUTSTANDING}
+                {'_id': str(rq.url), 'request': Binary(zlib.compress(pickle.dumps(rq))), 'status': self.OUTSTANDING}
             )
-        except errors.DuplicateKeyError as e:
+        except errors.DuplicateKeyError:
             Elog.error('DuplicateKeyError push error ')
             pass
 

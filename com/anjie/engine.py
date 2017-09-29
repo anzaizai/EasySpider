@@ -15,6 +15,8 @@ import functools
 import psutil
 from com.anjie.spider.AnJuKePipeline import AnJuKePipeline
 from com.anjie.spider.AnJukeSpider import AnJuKeSpider;
+from com.anjie.spider.TC58Pipeline import TC58Pipeline;
+from com.anjie.spider.TC58Spider import TC58Spider;
 
 
 class Engine:
@@ -46,19 +48,20 @@ class Engine:
 
     # 协程下载页面
     async def download_task(self, rq):
-        resultPage = self.download.excuteRequest(rq);
-        if resultPage is not None:
-            self.scheduler.mongo_queue.complete(rq.url);
-        spider = self.spider.get(rq.spiderName, None)
-        if spider:
-            (pipelineItems, nextRequests) = spider.pagerBack(resultPage, rq);
-        if nextRequests:
-            self.scheduler.addRequests(nextRequests);
+        if  rq and  hasattr(rq,'url'):
+            resultPage = self.download.excuteRequest(rq);
+            if resultPage is not None:
+                self.scheduler.mongo_queue.complete(rq.url);
+            spider = self.spider.get(rq.spiderName, None)
+            if spider:
+                (pipelineItems, nextRequests) = spider.pagerBack(resultPage, rq);
+            if nextRequests:
+                self.scheduler.addRequests(nextRequests);
 
-        pipeline = self.pipeline.get(rq.spiderName, None)
-        if pipelineItems and pipeline:
-            pipeline.piplineData(pipelineItems);
-        return (resultPage, rq);
+            pipeline = self.pipeline.get(rq.spiderName, None)
+            if pipelineItems and pipeline:
+                pipeline.piplineData(pipelineItems);
+            return (resultPage, rq);
 
 
     def done_call_back(self, loop, result):
@@ -148,7 +151,6 @@ def process_crawler(spiders, pipelines, scheduler):
     num_cpus = multiprocessing.cpu_count()
     # pool = multiprocessing.Pool(processes=num_cpus)
     Elog.info('Starting {} processes'.format(num_cpus));
-
     # pool.apply(func=running_tas)
     startTime = datetime.now();
     # pool.join();
@@ -192,4 +194,4 @@ def process_crawler_wake():
 
 
 if __name__ == '__main__':
-    process_crawler(spiders=[AnJuKeSpider(), ], pipelines=[AnJuKePipeline(), ], scheduler=MongoScheduler())
+    process_crawler(spiders=[AnJuKeSpider(),TC58Spider() ], pipelines=[AnJuKePipeline(),TC58Pipeline() ], scheduler=MongoScheduler())
